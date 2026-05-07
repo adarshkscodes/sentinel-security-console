@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentinel Security Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <div class="container nav">
+        <div class="brand" aria-label="Sentinel Security Console logo">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.8"
+            aria-hidden="true"
+          >
+            <path
+              d="M24 4 38 10v11c0 9.5-5.7 17.8-14 22-8.3-4.2-14-12.5-14-22V10L24 4Z"
+            ></path>
+            <path d="M24 13v14"></path>
+            <path d="m18 23 6 6 6-6"></path>
+          </svg>
+          <div>
+            <div>Sentinel</div>
+            <div class="small muted">Security Console</div>
+          </div>
+        </div>
+        <div class="nav-actions">
+          <button class="pill" data-theme-toggle aria-label="Switch theme">
+            Theme
+          </button>
+          <button class="pill" id="walletBtn">Connect Wallet</button>
+          <button class="btn btn-primary" id="publishTopBtn">
+            Publish Attestation
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <section class="hero section">
+        <article class="hero-card">
+          <div class="eyebrow">
+            Web prototype · Internal dApp for security teams
+          </div>
+          <h1>Monitor smart-contract risk before it becomes an exploit.</h1>
+          <p>
+            Sentinel is a prototype for a Blockchain Security Engineer. It lets
+            a reviewer connect a wallet, inspect a target contract, score
+            operational risk, record findings, and publish a signed audit
+            attestation with a mock on-chain proof trail.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#console">Open Console</a>
+            <button class="btn" id="loadDemoBtn">Load Demo Contract</button>
+          </div>
+          <div class="hero-grid">
+            <div class="micro">
+              <span class="muted small">Primary job-to-be-done</span
+              ><strong>Security triage</strong
+              ><span class="small muted"
+                >Fast first-pass review before manual audit depth.</span
+              >
+            </div>
+            <div class="micro">
+              <span class="muted small">dApp moment</span
+              ><strong>Wallet-signed attestation</strong
+              ><span class="small muted"
+                >Engineer signs and stores a risk snapshot.</span
+              >
+            </div>
+            <div class="micro">
+              <span class="muted small">Operational flow</span
+              ><strong>Pause drill</strong
+              ><span class="small muted"
+                >Preview emergency action sequencing.</span
+              >
+            </div>
+            <div class="micro">
+              <span class="muted small">Security lens</span
+              ><strong>Admin-key exposure</strong
+              ><span class="small muted"
+                >Map privilege and upgradeability risk.</span
+              >
+            </div>
+          </div>
+        </article>
+        <aside class="hero-card hero-side" aria-label="Risk summary preview">
+          <div class="eyebrow">Latest posture</div>
+          <div class="score-ring"><span id="headlineScore">64</span></div>
+          <div style="text-align: center">
+            <div style="font-weight: 800; font-size: 1.3rem">
+              High risk surface
+            </div>
+            <div class="muted small">
+              2 critical, 1 high, 1 medium finding in demo mode.
+            </div>
+          </div>
+          <div class="status-row">
+            <div class="status-chip">Upgradeable Proxy</div>
+            <div class="status-chip">Oracle Dependency</div>
+            <div class="status-chip">Pause Coverage Partial</div>
+          </div>
+          <div class="tx-log" id="recentTxPreview">
+            <div class="tx">
+              <div class="small muted">Most recent attestation</div>
+              <div class="mono small">0x7c0a...5d11</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="console">
+        <div class="section-head">
+          <div>
+            <h2>Security console</h2>
+            <p>
+              Suggested default: a web-based internal dApp. It fits security
+              engineers best because it supports fast reviews, team workflows,
+              and wallet-signed records without the friction of app
+              installation.
+            </p>
+          </div>
+        </div>
+        <div class="dashboard">
+          <aside class="panel">
+            <h3>Target contract</h3>
+            <div class="stack">
+              <label
+                >Chain
+                <select id="chainSelect">
+                  <option>Ethereum</option>
+                  <option>Base</option>
+                  <option>Polygon</option>
+                  <option>Arbitrum</option>
+                </select>
+              </label>
+              <label
+                >Contract address
+                <input
+                  id="contractInput"
+                  value="0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                />
+              </label>
+              <label
+                >Profile
+                <select id="profileSelect">
+                  <option value="defi">DeFi Vault</option>
+                  <option value="bridge">Bridge Escrow</option>
+                  <option value="nft">NFT Marketplace</option>
+                </select>
+              </label>
+              <label
+                >Threat note
+                <textarea id="threatNote">
+Review privileged roles, pause scope, upgradeability, price oracle coupling, and external call surfaces.</textarea
+                >
+              </label>
+              <div class="actions">
+                <button class="btn btn-primary" id="scanBtn">
+                  Run Analysis
+                </button>
+                <button class="btn" id="clearBtn">Reset</button>
+              </div>
+            </div>
+          </aside>
+
+          <div>
+            <section class="kpis" aria-label="Key metrics">
+              <article class="card">
+                <div class="kpi-label">Risk score</div>
+                <div class="kpi-value" id="riskScore">64</div>
+                <div class="small muted">
+                  Weighted by severity and operational blast radius.
+                </div>
+              </article>
+              <article class="card">
+                <div class="kpi-label">Critical findings</div>
+                <div class="kpi-value" id="criticalCount">2</div>
+                <div class="small muted">
+                  Immediate review before deploy or TVL growth.
+                </div>
+              </article>
+              <article class="card">
+                <div class="kpi-label">Privilege paths</div>
+                <div class="kpi-value" id="privilegeCount">3</div>
+                <div class="small muted">
+                  Owner, upgrader, guardian role exposure.
+                </div>
+              </article>
+              <article class="card">
+                <div class="kpi-label">Response readiness</div>
+                <div class="kpi-value" id="readinessScore">71%</div>
+                <div class="small muted">
+                  Playbook + pause coverage + signer readiness.
+                </div>
+              </article>
+            </section>
+
+            <div class="analysis">
+              <section class="panel">
+                <div class="section-head" style="margin-bottom: 0">
+                  <div>
+                    <h3>Findings</h3>
+                    <p class="muted small">
+                      Filter and inspect issue patterns that matter to a
+                      Blockchain Security Engineer.
+                    </p>
+                  </div>
+                  <select id="severityFilter" style="max-width: 180px">
+                    <option value="all">All severities</option>
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+                <div class="risk-bar" aria-hidden="true">
+                  <span id="riskBar"></span>
+                </div>
+                <div id="findingList" class="finding-list"></div>
+              </section>
+
+              <section class="panel">
+                <h3>Attestation flow</h3>
+                <p class="muted small">
+                  This is the dApp step: sign a security snapshot and create a
+                  tamper-evident review trail for the team.
+                </p>
+                <div class="actions">
+                  <button class="btn btn-primary" id="publishBtn">
+                    Sign & Publish
+                  </button>
+                  <button class="btn" id="pauseBtn">
+                    Simulate Pause Drill
+                  </button>
+                </div>
+                <div class="tx-log" id="txLog"></div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section grid-2">
+        <article class="panel">
+          <h3>Incident playbook</h3>
+          <div class="playbook" id="playbookList"></div>
+        </article>
+        <article class="panel">
+          <h3>Why this prototype fits the role</h3>
+          <div class="playbook">
+            <div class="playbook-item">
+              <div class="check">1</div>
+              <div>
+                <strong>Risk-first workflow.</strong>
+                <div class="small muted">
+                  Security engineers usually need triage before deeper manual
+                  review, not just raw scanner output.
+                </div>
+              </div>
+            </div>
+            <div class="playbook-item">
+              <div class="check">2</div>
+              <div>
+                <strong>On-chain accountability.</strong>
+                <div class="small muted">
+                  A signed attestation is more role-aligned than a generic
+                  dashboard because it mirrors review approval, handoff, and
+                  audit evidence.
+                </div>
+              </div>
+            </div>
+            <div class="playbook-item">
+              <div class="check">3</div>
+              <div>
+                <strong>Response readiness.</strong>
+                <div class="small muted">
+                  The pause-drill view makes the app useful during incidents,
+                  not only during development.
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <div class="footer-note">
+        Prototype behavior is local and mocked for speed, but the product
+        structure is ready to extend with ethers.js, wallet providers, contract
+        metadata, and audit evidence storage.
+      </div>
+    </main>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>
