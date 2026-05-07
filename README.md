@@ -1,3 +1,7 @@
+## Live Demo
+
+[View the live app](https://adarshkscodes.github.io/sentinel-security-console/)
+
 # Sentinel Security Console
 
 Sentinel Security Console is a web-based internal dApp prototype designed for a **Blockchain Security Engineer** workflow. It helps simulate smart-contract risk triage, severity-based findings review, wallet-connected security attestation, and incident response readiness in a clean dashboard interface.
