@@ -61,32 +61,6 @@ Open `index.html` in your browser.
 2. Right-click `index.html`
 3. Click **Open with Live Server**
 
-## Screenshots
-
-> Add your screenshots inside a folder named `screenshots` in the root of the project.
-
-Example structure:
-
-```text
-sentinel-security-console/
-├─ index.html
-├─ style.css
-├─ script.js
-├─ README.md
-└─ screenshots/
-   ├─ dashboard.png
-   ├─ findings.png
-   └─ mobile-view.png
-```
-
-Then use this format in README:
-
-```md
-## Screenshots
-
-![alt text](image.png)
-![alt text](image-1.png)
-
 ## Current Workflow
 
 The current prototype supports the following simulated flow:
