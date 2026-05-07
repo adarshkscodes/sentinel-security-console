@@ -130,7 +130,7 @@ Planned upgrades for the next version:
 This project was pushed from VSCode using Git. If you want to clone and run it:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/sentinel-security-console.git
+git clone https://github.com/adarshkscodes/sentinel-security-console.git
 cd sentinel-security-console
 ```
 
