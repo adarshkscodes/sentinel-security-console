@@ -84,14 +84,8 @@ Then use this format in README:
 ```md
 ## Screenshots
 
-### Dashboard
-
-### Findings Panel
-
-### Mobile View
-```
-
-GitHub supports relative image paths in README files, so images stored in your repository can be rendered directly in Markdown. [web:43]
+![alt text](image.png)
+![alt text](image-1.png)
 
 ## Current Workflow
 
